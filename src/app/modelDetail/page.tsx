@@ -179,9 +179,9 @@ export default function ModelDetails() {
                   OUTPUT
                   {prediction?.status === "starting" ? <Loading /> : null}
                 </h2>
-                {showInitialImage ? (
+                {showInitialImage && modelDetails.cover_image_url ? (
                   <Image
-                    src={modelDetails.cover_image_url}
+                    src={modelDetails?.cover_image_url}
                     alt="img"
                     width={700}
                     height={400}

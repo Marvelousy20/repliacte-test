@@ -122,13 +122,17 @@ const DynamicForms: React.FC<DynamicFormProps> = ({
         schema.Input.properties[key]?.allOf ||
         schema.Input.properties[key]?.type === "number"
       ) {
-        const intValue = parseInt(value as string, 10);
-        if (!isNaN(intValue) && Number.isInteger(intValue)) {
-          sanitizedFormData[key] = intValue;
+        if (value === "") {
+          sanitizedFormData[key] = 0;
         } else {
-          sanitizedFormData[key] = value;
-          // Handle the case where the value is not a valid integer
-          console.error(`Invalid integer value for ${key}: ${value}`);
+          const intValue = parseInt(value as string, 10);
+          if (!isNaN(intValue) && Number.isInteger(intValue)) {
+            sanitizedFormData[key] = intValue;
+          } else {
+            sanitizedFormData[key] = value;
+            // Handle the case where the value is not a valid integer
+            console.error(`Invalid integer value for ${key}: ${value}`);
+          }
         }
       } else {
         sanitizedFormData[key] = value;
